@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Conference;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -31,10 +32,21 @@ class HomeController extends Controller
         #Проверка если есть GET параметр
         if(filled($get))
         {
-            $query->where("title", 'LIKE', "%$get%")->paginate(12);
+            $query->where("title", 'LIKE', "%$get%")->orderBy('created_at')->paginate(12);
         }
         $products = $query->orderBy('created_at')->paginate(12)->withPath('?'.$request->getQueryString());
 
         return view('welcome', ['categories'=>$categories, 'products'=>$products, 'get'=>$get]);
+    }
+    public function changeLocale($locale)
+    {
+        $languages = ['ru','uk','en'];
+        if(!in_array($locale, $languages))
+        {
+            $locale='ru';
+        }
+        session(['locale'=>$locale]);
+        App::setLocale($locale);
+        return redirect()->back();
     }
 }

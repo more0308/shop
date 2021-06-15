@@ -10,13 +10,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="breadcrumb-wrap text-center">
-                            <h2>Интернет магазин уМакса</h2>
-                            <p>Все та навіть більше</p>
+                            <h2>@lang('home.name_store')</h2>
+                            <p>@lang('home.all_and_more')</p>
                             <div class="row justify-content-center">
                                 <div class="col-xl-5 col-lg-7 col-md-10">
                                     <div class="s-slider-search-form t-slider-search-form">
                                         <form action="{{route('home')}}" method="get">
-                                            <input name="search" type="text" placeholder="Поиск...">
+                                            <input name="search" type="text" placeholder="@lang('home.search')">
                                             <button><i class="fas fa-search"></i></button>
                                         </form>
                                     </div>
@@ -27,7 +27,7 @@
                                     @if(isset($get))
                                         <h2>Результаты поиска:</h2>
                                         @else
-                                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('home')}}">@lang('home.home')</a></li>
                                         @endif
                                 </ol>
                             </nav>
@@ -46,7 +46,7 @@
                             <aside class="product-sidebar">
                                 <div class="widget">
                                     <div class="single-product-widget mb-30">
-                                        <h4 class="p-sidebar-title">Категории</h4>
+                                        <h4 class="p-sidebar-title">@lang('home.categories')</h4>
                                         <div class="p-sidebar-cat">
                                             <ul>
                                                 @foreach($categories as $category)

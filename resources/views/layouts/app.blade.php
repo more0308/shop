@@ -49,7 +49,21 @@
                         <a href="{{route('home')}}"><img src="/assets/img/logo/logo.png" alt="Logo"></a>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-6 col-sm-6 text-right">
+
+                    <div class="col-lg-9 col-md-6 col-sm-6 text-right">
+                        <div class="main-menu d-none d-lg-inline-block">
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <li><a href="#">@lang('home.language')</a>
+                                        <ul class="submenu">
+                                            <li><a href="{{route('locale',['locale'=>'uk'])}}">@lang('home.languages.uk')</a></li>
+                                            <li><a href="{{route('locale',['locale'=>'ru'])}}">@lang('home.languages.ru')</a></li>
+                                            <li><a href="{{route('locale',['locale'=>'en'])}}">@lang('home.languages.en')</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
 
                     @if(\Illuminate\Support\Facades\Auth::check())
                     <div class="shop-cart position-relative d-none d-sm-inline-block">
@@ -64,6 +78,7 @@
                         <span>{{$total}}</span>
                         <div class="menu-cart-widget">
                             <ul>
+
                                 @forelse(\Cart::session(\Illuminate\Support\Facades\Auth::user()->id)->getContent() as $order)
                                 <li class="menu-cart-product-list">
                                     <div class="cart-product-thumb">
@@ -82,11 +97,11 @@
                                     </div>
                                 </li>
                                 @empty
-                                    <p>Корзина пуста...</p>
+                                    <p>@lang('home.basket_is_empty')</p>
                                 @endforelse
                             </ul>
                             <div class="cart-price fix mb-15">
-                                <span>В общем</span>
+                                <span>@lang('home.generally')</span>
                                 <?php
                                 $total = 0;
                                 foreach (\Cart::session(\Illuminate\Support\Facades\Auth::user()->id)->getContent() as $order)
@@ -97,7 +112,7 @@
                                 <span>$ {{$total}}.00</span>
                             </div>
                             <div class="cart-checkout-btn">
-                                <a href="#" class="btn">Оплатить</a>
+                                <a href="#" class="btn">@lang('home.payment')</a>
                             </div>
                         </div>
                     </div>
@@ -108,14 +123,14 @@
                                 @csrf
                                 @if(\Illuminate\Support\Facades\Auth::user()->role=='admin')
                                     <div class="header-btn d-none d-xl-inline-block">
-                                        <a href="{{route('admin.index')}}" class="btn"><i class="fas fa-user"></i>Админка</a>
+                                        <a href="{{route('admin.index')}}" class="btn"><i class="fas fa-user"></i>@lang('home.admin')</a>
                                     </div>
                                 @endif
-                                <button class="btn"><i class="fas fa-user"></i>Выйти</button>
+                                <button class="btn"><i class="fas fa-user"></i>@lang('home.leave')</button>
                             </form>
                         @else
-                            <a href="/{{'login'}}" class="btn"><i class="fas fa-user"></i>Авторизация</a>
-                            <a href="/{{'register'}}" class="btn"><i class="fas fa-user"></i>Регистрация</a>
+                            <a href="/{{'login'}}" class="btn"><i class="fas fa-user"></i>@lang('home.login')</a>
+                            <a href="/{{'register'}}" class="btn"><i class="fas fa-user"></i>@lang('home.register')</a>
                         @endif
                     </div>
                 </div>

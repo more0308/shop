@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function comment(Request $request)
     {
         $request->validate([
-            'describe'=>'required|max:200'
+            'message'=>'required|max:200'
         ]);
         DB::table('comments')->insert([
             'user_id'=>Auth::user()->id,

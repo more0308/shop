@@ -12,7 +12,7 @@
                             <h2>{{$product->title}}</h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="index.html">@lang('home.home')</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -34,10 +34,10 @@
                                 <div class="product-details-tab">
                                     <ul class="nav product-tab" id="myTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link btn active" id="item-details-tab" data-toggle="tab" href="#item-details" role="tab" aria-controls="item-details" aria-selected="true">Описание товара</a>
+                                            <a class="nav-link btn active" id="item-details-tab" data-toggle="tab" href="#item-details" role="tab" aria-controls="item-details" aria-selected="true">@lang('product.describe_product')</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link btn" id="product-reviews-tab" data-toggle="tab" href="#product-reviews" role="tab" aria-controls="product-reviews" aria-selected="false">Отзывы</a>
+                                            <a class="nav-link btn" id="product-reviews-tab" data-toggle="tab" href="#product-reviews" role="tab" aria-controls="product-reviews" aria-selected="false">@lang('product.comments')</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content product-tab-content" id="myTabContent">
@@ -72,7 +72,7 @@
                                                     </ul>
                                                 </div>
                                                     @empty
-                                                   <p>Вы будете первым, кто добавит коментарий...</p>
+                                                   <p>@lang('product.first')</p>
                                                 @endforelse
                                                     <div class="pagination-wrap mt-30 text-center">
                                                         <nav>
@@ -84,13 +84,17 @@
                                                     </div>
                                                     @if(\Illuminate\Support\Facades\Auth::check())
                                                 <div class="item-comment-box">
-                                                    <h3>Оставьте отзыв о товаре</h3>
+                                                    <h3>@lang('product.leave_review')</h3>
                                                     <div class="item-comment-form">
                                                         <form action="{{route('product.comment', ['product_id'=>$product->id])}}" method="post">
                                                             @csrf
-                                                            <textarea name="message" id="message" placeholder="Ваше мнение о товаре *"></textarea>
-                                                            <button class="btn">Отправить</button>
+                                                            <textarea name="message" id="message" placeholder="@lang('product.your_opinion')"></textarea>
+                                                            <button class="btn">@lang('product.send')</button>
+                                                            @error('message')
+                                                            <span class="help-block text-danger">{{$message}}</span>
+                                                            @enderror
                                                         </form>
+
                                                     </div>
                                                 </div>
                                                 @endif
@@ -108,20 +112,20 @@
                                         <div class="item-sidebar-btn mb-25">
                                                 <form action="{{route('product.order.add', ['id'=>$product->id, 'name'=>$product->title, 'price'=>$product->price, 'image'=>$product->image])}}" method="post">
                                                     @csrf
-                                                    <input class="btn" name="count" type="text" placeholder="Количество...">
-                                                    <input type="submit" class="btn" value="Добавить в корзину">
+                                                    <input class="btn" name="count" type="text" placeholder="@lang('product.quantity')">
+                                                    <input type="submit" class="btn" value="@lang('product.add')">
                                                 </form>
                                         </div>
                                     </div>
                                 @endif
                                 <div class="sidebar-item-info">
-                                    <h5 class="vendor-sidebar-title text-center">Информация</h5>
+                                    <h5 class="vendor-sidebar-title text-center">@lang('product.information')</h5>
                                     <ul>
-                                        <li>Цена<span>${{$product->price}}.00</span></li>
-                                        <li>Количество на складе<span>{{$product->count}}</span></li>
-                                        <li>Выставлено на продажу<span>{{date('Y-m-d',strtotime($product->created_at))}}</span></li>
-                                        <li>Категория<span>{{$product->category->title}}</span></li>
-                                        <li>Customer Rating<span>
+                                        <li>@lang('product.price')<span>${{$product->price}}.00</span></li>
+                                        <li>@lang('product.quantity_in_stock')<span>{{$product->count}}</span></li>
+                                        <li>@lang('product.for_sale')<span>{{date('Y-m-d',strtotime($product->created_at))}}</span></li>
+                                        <li>@lang('product.category')<span>{{$product->category->title}}</span></li>
+                                        <li>@lang('product.rating')<span>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>

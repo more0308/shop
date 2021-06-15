@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('locale/{locale}', 'HomeController@changeLocale')->name('locale');
+Route::middleware(['set_locale'])->group(function (){
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', function () {
     return redirect('/');
 });
+
+
 
 Auth::routes();
 
@@ -42,3 +46,4 @@ Route::name('admin.')->namespace('Admin')->middleware('is_admin')->prefix('/admi
     Route::post('/product/create/post', 'AdminController@productCreatePost')->name('product.create.post');
 });
 
+});
