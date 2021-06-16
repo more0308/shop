@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -56,7 +56,7 @@
                                 <ul>
                                     <li><a href="#">@lang('home.language')</a>
                                         <ul class="submenu">
-                                            <li><a href="{{route('locale',['locale'=>'uk'])}}">@lang('home.languages.uk')</a></li>
+                                            <li><a href="{{route('locale',['locale'=>'ua'])}}">@lang('home.languages.ua')</a></li>
                                             <li><a href="{{route('locale',['locale'=>'ru'])}}">@lang('home.languages.ru')</a></li>
                                             <li><a href="{{route('locale',['locale'=>'en'])}}">@lang('home.languages.en')</a></li>
                                         </ul>
@@ -112,7 +112,7 @@
                                 <span>$ {{$total}}.00</span>
                             </div>
                             <div class="cart-checkout-btn">
-                                <a href="#" class="btn">@lang('home.payment')</a>
+                                <a href="{{route('product.payment.get')}}" class="btn">@lang('home.payment')</a>
                             </div>
                         </div>
                     </div>

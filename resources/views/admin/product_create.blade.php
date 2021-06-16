@@ -9,16 +9,41 @@
                 <form method="post" action="{{route('admin.product.create.post')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="" for="exampleEmail">Название продукта</label>
+                        <label class="" for="exampleEmail">Название продукта UA</label>
                         <input
                             class="form-control"
-                            name="title"
+                            name="title1"
                             placeholder="Название продукта"
                             type="text"/>
                     </div>
-                    @error('title')
+                    @error('title1')
                     <span class="help-block text-danger">{{$message}}</span>
                     @enderror
+
+                    <div class="form-group">
+                        <label class="" for="exampleEmail">Название продукта RU</label>
+                        <input
+                            class="form-control"
+                            name="title2"
+                            placeholder="Название продукта"
+                            type="text"/>
+                    </div>
+                    @error('title2')
+                    <span class="help-block text-danger">{{$message}}</span>
+                    @enderror
+
+                    <div class="form-group">
+                        <label class="" for="exampleEmail">Название продукта EN</label>
+                        <input
+                            class="form-control"
+                            name="title3"
+                            placeholder="Название продукта"
+                            type="text"/>
+                    </div>
+                    @error('title3')
+                    <span class="help-block text-danger">{{$message}}</span>
+                    @enderror
+
                     <div class="form-group">
                         <label class="" for="exampleEmail">Цена</label>
                         <input
@@ -54,11 +79,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="" for="exampleText">Описание</label>
+                        <label class="" for="exampleText">Описание UA</label>
                         <textarea
                             class="form-control"
                             id="exampleText"
-                            name="describe"
+                            name="describe1"
+                        ></textarea>
+                    </div>
+                    @error('describe')
+                    <span class="help-block text-danger">{{$message}}</span>
+                    @enderror
+                    <div class="form-group">
+                        <label class="" for="exampleText">Описание RU</label>
+                        <textarea
+                            class="form-control"
+                            id="exampleText"
+                            name="describe2"
+                        ></textarea>
+                    </div>
+                    @error('describe')
+                    <span class="help-block text-danger">{{$message}}</span>
+                    @enderror
+                    <div class="form-group">
+                        <label class="" for="exampleText">Описание EN</label>
+                        <textarea
+                            class="form-control"
+                            id="exampleText"
+                            name="describe3"
                         ></textarea>
                     </div>
                     @error('describe')

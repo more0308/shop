@@ -2,7 +2,7 @@
 return [
     'admin'=>'Admin',
     'language'=>'Language',
-    'languages'=>['ru'=>'Russia','uk'=>'Ukraine','en'=>'England'],
+    'languages'=>['ru'=>'Russia','ua'=>'Ukraine','en'=>'England'],
     'basket_is_empty'=>'Basket is empty...',
     'generally'=>'Generally',
     'payment'=>'Payment',

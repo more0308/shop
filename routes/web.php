@@ -26,8 +26,11 @@ Auth::routes();
 
 Route::name('product.')->namespace('Product')->prefix('/product')->group(function ()
 {
+
     Route::get('/{id}', 'ProductController@show')->name('show');
     Route::post('/comment', 'ProductController@comment')->name('comment');
+    Route::get('/payment/show', 'ProductController@paymentGet')->name('payment.get');
+    Route::post('/payment/show', 'ProductController@paymentPost')->name('payment.post');
     Route::post('/orderAdd', 'ProductController@orderAdd')->name('order.add');
     Route::post('/orderDelete', 'ProductController@orderDelete')->name('order.delete');
 });

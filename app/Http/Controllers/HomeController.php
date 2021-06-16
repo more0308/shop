@@ -32,15 +32,25 @@ class HomeController extends Controller
         #Проверка если есть GET параметр
         if(filled($get))
         {
-            $query->where("title", 'LIKE', "%$get%")->orderBy('created_at')->paginate(12);
+            $query
+                ->leftJoin('product_names','products.id','=','product_names.product_id')
+                ->where('language','=',App::getLocale())
+                ->where("title", 'LIKE', "%$get%")
+                ->orderBy('created_at')
+                ->paginate(12);
         }
-        $products = $query->orderBy('created_at')->paginate(12)->withPath('?'.$request->getQueryString());
+        $products = $query
+            ->leftJoin('product_names','products.id','=','product_names.product_id')
+            ->where('language','=',App::getLocale())
+            ->orderBy('created_at')
+            ->paginate(12)
+            ->withPath('?'.$request->getQueryString());
 
         return view('welcome', ['categories'=>$categories, 'products'=>$products, 'get'=>$get]);
     }
     public function changeLocale($locale)
     {
-        $languages = ['ru','uk','en'];
+        $languages = ['ru','ua','en'];
         if(!in_array($locale, $languages))
         {
             $locale='ru';

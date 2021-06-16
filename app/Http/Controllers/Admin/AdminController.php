@@ -89,25 +89,49 @@ class AdminController extends Controller
     public function productCreatePost(Request $request)
     {
         $request->validate([
-            'title'=>'required|max:100',
-            'describe'=>'required|max:500',
+            'title2'=>'required|max:100',
+            'describe2'=>'required|max:500',
+            'title3'=>'required|max:100',
+            'describe3'=>'required|max:500',
+            'title1'=>'required|max:100',
+            'describe1'=>'required|max:500',
             'price'=>'required|int|min:1',
             'count'=>'required|int|min:0',
             'image'=>'required|mimes:jpeg,png,jpg|dimensions:max_width=10000, max_height=10000'
         ]);
-
+        $image = $request->file('image');
+        $image_name = md5(microtime() . rand(0, 9999)).".png";
+        \Image::make($image)->save(public_path('assets/image/'.$image_name));
         DB::table('products')
             ->insert([
-                'title'=> $request->input('title'),
-                'describe'=> $request->input('describe'),
                 'price'=> $request->input('price'),
                 'count'=> $request->input('count'),
                 'image'=> 'assets/image/'.$image_name,
                 'category_id'=> $request->input('category_id')
             ]);
-        $image = $request->file('image');
-        $image_name = md5(microtime() . rand(0, 9999)).".png";
-        \Image::make($image)->save(public_path('assets/image/'.$image_name));
+        $product_max_id = DB::table('products')
+            ->max('id');
+        DB::table('product_names')
+            ->insert([
+                'product_id'=> $product_max_id,
+                'language'=>'ua',
+                'title'=> $request->input('title1'),
+                'describe'=> $request->input('describe1'),
+            ]);
+        DB::table('product_names')
+            ->insert([
+                'product_id'=> $product_max_id,
+                'language'=>'ru',
+                'title'=> $request->input('title2'),
+                'describe'=> $request->input('describe2'),
+            ]);
+        DB::table('product_names')
+            ->insert([
+                'product_id'=> $product_max_id,
+                'language'=>'en',
+                'title'=> $request->input('title3'),
+                'describe'=> $request->input('describe3'),
+            ]);
         return redirect()->route('admin.index');
     }
 
